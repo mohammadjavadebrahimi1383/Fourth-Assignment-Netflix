@@ -1,36 +1,77 @@
 package org.example;
-
+import java.util.Objects;
 import java.util.ArrayList;
 
 class User {
     /*
-    * The user should contain username password.
-    * The user should contain an ArrayList of favorite shows and watch history.
-    * FUNCTION: the user should have a function to watch a show and add it to watch history.
-    *  *** NOTE: All search functions in user are for searching in favorite shows ***
-    */
+     * FUNCTION: the user should have a function to watch a show and add it to watch history.
+     */
 
+    private String username, pass;
+    private ArrayList <TVShow> Favorites;
+    private ArrayList <TVShow> whatchHistory;
+    public User(String username, String pass) {
+        this.username = username;
+        this.pass = pass;
+        this.Favorites = new ArrayList<>();
+        this.whatchHistory= new ArrayList<>();
+    }
 
     public ArrayList<TVShow> searchByTitle(String title) {
-        // Implement search by title in favorite shows  logic here
-        return null;
+
+        ArrayList<TVShow> output = new ArrayList<>();
+        for (TVShow show : Favorites)
+        {
+            if(Objects.equals(show.getTitle(), title))
+                output.add(show);
+        }
+        return output;
     }
     public ArrayList<TVShow> searchByGenre(String genre) {
-        // Implement search by genre in favorite shows  logic here
-        return null;
+
+        ArrayList<TVShow> output = new ArrayList<>();
+
+        for (TVShow show : Favorites)
+        {
+            if(Objects.equals(show.getGenre(), genre))
+                output.add(show);
+        }
+        return output;
     }
     public ArrayList<TVShow> searchByReleaseYear(int year) {
-        // Implement search by release year in favorite shows logic here
-        return null;
+        ArrayList<TVShow> output = new ArrayList<>();
+
+        for (TVShow show : Favorites)
+        {
+            if(Objects.equals(show.getReleaseYear(), year))
+                output.add(show);
+        }
+        return output;
     }
     public void addToFavorites(TVShow show) {
         // Implement add to favorites logic here
+        Favorites.add(show);
     }
     public void viewFavorites() {
-        // Implement view favorites logic here
+        for (TVShow i : Favorites)
+        {
+            System.out.println(i.toString());
+        }
     }
-    public ArrayList<TVShow> getRecommendations() {
-        // Implement get recommendations logic here
-        return null;
+    public void addToHistory(TVShow show) {
+
+        whatchHistory.add(show);
+    }
+
+    public void viewHistory() {
+        for (TVShow i : whatchHistory)
+        {
+            System.out.println(i.toString());
+        }
+    }
+
+    public boolean userPassCheck(String passInput){
+        if (passInput.equals(pass)) return true;
+        return false;
     }
 }
